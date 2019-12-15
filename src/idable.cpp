@@ -1,6 +1,6 @@
-#include "Idable.hpp"
+#include "idable.hpp"
 
-namespace COMPANY_NAME
+namespace Slate
 {
 	int object_id_count{ 1 };
 
@@ -11,9 +11,9 @@ namespace COMPANY_NAME
 			return Variable();
 		}	
 		
-		const Id::Variable_Type& Id::Id() const
+		Id::Variable_Type const& Id::Id() const
 		{
 			return Variable();
 		}		
 	}
-} // namespace COMPANY_NAME::Memory
+} // namespace Slate

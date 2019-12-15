@@ -1,0 +1,4 @@
+Target_Sources(memory PUBLIC
+		$<BUILD_INTERFACE:${CMAKE_CURRENT_LIST_DIR}/block.cpp>
+		$<BUILD_INTERFACE:${CMAKE_CURRENT_LIST_DIR}/idable.cpp>
+	)

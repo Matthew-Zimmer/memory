@@ -1,37 +1,21 @@
-#TODO: Replace Memory with name
+cmake_minimum_required(VERSION 3.13)
 
-CMake_Minimum_Required(VERSION 3.13)
+project(memory)
 
-Project(Memory)
+add_library(memory STATIC "")
 
-If(DEFINED TESTING)
-	If(${TESTING} STREQUAL true)
-		Add_Executable(Memory "Test/Main.cpp")
-		Target_Compile_Definitions(Memory PRIVATE TESTING)
-		Add_Subdirectory(Test)
-	Else()
-		Add_Library(Memory STATIC "")
-	EndIf()
-	Unset(TESTING CACHE)
-ELSE()
-	Add_Library(Memory STATIC "")
-EndIf()
+add_subdirectory(include)
+add_subdirectory(src)
 
-Add_Subdirectory(Source)
-Add_Subdirectory(Include)
-Add_Subdirectory(Imp)
+target_compile_features(memory PUBLIC cxx_std_17)
 
-Target_Compile_Features(Memory 
-    PUBLIC cxx_std_17)
-
-Set(CMAKE_CXX_STANDARD "libc++")
 #Set(CMAKE_CXX_FLAGS "-Wall" "-Wextra")
 
-Install(TARGETS Memory EXPORT Memory DESTINATION lib/Memory)
-Install(EXPORT Memory DESTINATION lib/Memory)
-Install(FILES MemoryConfig.cmake DESTINATION lib/Memory)
+install(TARGETS memory EXPORT memory DESTINATION lib/memory)
+install(EXPORT memory DESTINATION lib/memory)
+install(FILES memory-config.cmake DESTINATION lib/memory)
 
 #Fill in dependencies projects
 
-Find_Package(Stream REQUIRED)
-Target_Link_Libraries(Memory PUBLIC Stream)
+find_package(stream REQUIRED)
+target_link_libraries(memory PUBLIC stream)
