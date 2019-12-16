@@ -229,6 +229,21 @@ namespace Slate
 				//Add to the vector
 				items<Raw_Type>.push_back(std::forward<Type>(obj));
 			}
+
+			template <typename Type, typename ... Args>
+			void Emplace(Args&& ... args)	
+			{
+				//Add the clean up functions if necessary only if it is not a clean up function itself
+				if constexpr(!std::is_same_v<Type, Virtual_Functor<Clean_Up>>)
+					if (!items<Type>.size())
+						Add<Virtual_Functor<Clean_Up>>(Make_Virtual_Functor<Clean_Up, Type>());
+				//Add other functions that Type declares it uses
+				if constexpr(Has_All_Behaviors<Type>)
+					if (!items<Type>.size())
+						Add_Behaviors<Type>(typename Type::All_Behaviors{});
+				//Add to the vector
+				items<Type>.emplace_back(std::forward<Args>(args)...);
+			}
 			
 			/*
 				Constraits:

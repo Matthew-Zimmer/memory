@@ -63,7 +63,7 @@ namespace Slate
 	{
 		static Id_Type id;
 	public:
-		using Required_Features = Features<Operators::Comparable>;
+		//using Required_Features = Features<Operators::Comparable>;
 
 		static Id_Type& Id()
 		{
@@ -71,11 +71,14 @@ namespace Slate
 		}
 
 		template <typename Type1, typename Type2>
-		friend bool operator<(Statically_Idable<Type1> const& idable1, Statically_Idable<Type2> const& idable2)
-		{
-			return Meta::Cast<Type1>(idable1).Id() < Meta::Cast<Type2>(idable2).Id();
-		}
+		friend bool operator<(Statically_Idable<Type1> const& idable1, Statically_Idable<Type2> const& idable2);
 	};
+
+	template <typename Type1, typename Type2>
+	bool operator<(Statically_Idable<Type1> const& idable1, Statically_Idable<Type2> const& idable2)
+	{
+		return Meta::Cast<Type1>(idable1).Id() < Meta::Cast<Type2>(idable2).Id();
+	}
 
 	template <typename Type>
 	Id_Type Statically_Idable<Type>::id = 0;
