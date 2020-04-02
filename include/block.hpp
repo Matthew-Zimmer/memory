@@ -76,7 +76,6 @@ namespace Slate
 		class Virtual_Functor : public Is<Virtual_Functor<Functor>, Features<Idable>>
 		{
 			std::unique_ptr<Function_Base<Functor<void>>> func;
-			using Is = Is<Virtual_Functor<Functor>, Features<Idable>>;
 		public:
 			Virtual_Functor() : func{}
 			{
@@ -87,7 +86,7 @@ namespace Slate
 				this->Init_All();
 			}
 			Virtual_Functor(Virtual_Functor const& f) = delete;
-			Virtual_Functor(Virtual_Functor&& f) : Is{ V::Id{ f.Id() } }, func{ std::move(f.func) } 
+			Virtual_Functor(Virtual_Functor&& f) : Virtual_Functor::Inherit{ V::Id{ f.Id() } }, func{ std::move(f.func) } 
 			{}
 
 			Virtual_Functor& operator=(Virtual_Functor const& f) = delete;

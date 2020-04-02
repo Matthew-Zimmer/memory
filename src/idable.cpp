@@ -6,14 +6,14 @@ namespace Slate
 
 	namespace Variable
 	{
-		Id::Variable_Type& Id::Id() 
+		auto& Id::Id() 
 		{
-			return Variable();
+			return this->variable();
 		}	
 		
-		Id::Variable_Type const& Id::Id() const
+		auto const& Id::Id() const
 		{
-			return Variable();
+			return this->variable();
 		}		
 	}
 } // namespace Slate

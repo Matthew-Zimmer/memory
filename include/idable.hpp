@@ -15,8 +15,8 @@ namespace Slate
 		using Id = class : public Base<Id_Type>
 		{
 		public:
-			Variable_Type& Id();
-			Variable_Type const& Id() const;
+			auto& Id();
+			auto const& Id() const;
 		};
 	}
 	
@@ -46,13 +46,13 @@ namespace Slate
 
 		void Init()
 		{
-			Meta::Cast<Type>(*this).Id() = object_id_count++;
+			Meta::cast<Type>(*this).Id() = object_id_count++;
 		}
 
 		template <typename Type1, typename Type2>
 		friend bool operator<(Idable<Type1> const& idable1, Idable<Type2> const& idable2)
 		{
-			return Meta::Cast<Type1>(idable1).Id() < Meta::Cast<Type2>(idable2).Id();
+			return Meta::cast<Type1>(idable1).Id() < Meta::cast<Type2>(idable2).Id();
 		}
 
 		
@@ -77,7 +77,7 @@ namespace Slate
 	template <typename Type1, typename Type2>
 	bool operator<(Statically_Idable<Type1> const& idable1, Statically_Idable<Type2> const& idable2)
 	{
-		return Meta::Cast<Type1>(idable1).Id() < Meta::Cast<Type2>(idable2).Id();
+		return Meta::cast<Type1>(idable1).Id() < Meta::cast<Type2>(idable2).Id();
 	}
 
 	template <typename Type>
